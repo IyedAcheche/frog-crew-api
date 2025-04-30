@@ -12,22 +12,6 @@ import org.springframework.stereotype.Component;
 public class AvailabilityMapper {
 
     /**
-     * Converts an Availability entity to its DTO representation.
-     *
-     * @param availability The Availability entity to convert
-     * @return A DTO representation of the Availability
-     */
-    public AvailabilityDto toDto(Availability availability) {
-        AvailabilityDto dto = new AvailabilityDto();
-        dto.setId(availability.getId());
-        dto.setCrewMemberId(availability.getCrewMember().getId());
-        dto.setGameId(availability.getGame().getId());
-        dto.setAvailable(availability.isAvailable());
-        dto.setComment(availability.getComment());
-        return dto;
-    }
-
-    /**
      * Creates a new Availability entity from DTO values.
      * Note: This method doesn't set the CrewMember and Game objects,
      * as those need to be retrieved from their respective repositories.
@@ -42,5 +26,21 @@ public class AvailabilityMapper {
         availability.setComment(dto.getComment());
         // CrewMember and Game need to be set separately using their IDs
         return availability;
+    }
+
+    /**
+     * Converts an Availability entity to its DTO representation.
+     *
+     * @param availability The Availability entity to convert
+     * @return A DTO representation of the Availability
+     */
+    public AvailabilityDto toDto(Availability availability) {
+        AvailabilityDto dto = new AvailabilityDto();
+        dto.setId(availability.getId());
+        dto.setCrewMemberId(availability.getCrewMember().getId());
+        dto.setGameId(availability.getGame().getId());
+        dto.setAvailable(availability.isAvailable());
+        dto.setComment(availability.getComment());
+        return dto;
     }
 } 

@@ -18,10 +18,17 @@ import java.util.stream.Collectors;
 @Service
 public class AvailabilityService {
 
-    private final AvailabilityRepository availabilityRepository;
-    private final CrewMemberRepository crewMemberRepository;
-    private final GameRepository gameRepository;
     private final AvailabilityMapper availabilityMapper;
+    private final GameRepository gameRepository;
+    private final CrewMemberRepository crewMemberRepository;
+    private final AvailabilityRepository availabilityRepository;
+
+    // Get all submitted availability records
+    public List<AvailabilityDto> getAllAvailability() {
+        return availabilityRepository.findAll().stream()
+                .map(availabilityMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     // Constructor injection of all required repositories and mapper
     public AvailabilityService(AvailabilityRepository availabilityRepository,
@@ -50,12 +57,5 @@ public class AvailabilityService {
         availability.setGame(game);
 
         availabilityRepository.save(availability);
-    }
-
-    // Get all submitted availability records
-    public List<AvailabilityDto> getAllAvailability() {
-        return availabilityRepository.findAll().stream()
-                .map(availabilityMapper::toDto)
-                .collect(Collectors.toList());
     }
 }

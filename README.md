@@ -27,10 +27,9 @@ FrogCrew is a Spring Boot REST API designed to help TCU Athletics manage schedul
 | UC-7       | Submit Availability                | POST /api/availability/submit                |
 | UC-14      | Admin Invites Crew Member          | POST /api/crew-members/invite?email=         |
 | UC-15      | Admin Deletes Crew Member          | DELETE /api/crew-members/{id}                |
-| UC-18      | Admin Creates Game Schedule        | POST /api/games/bulk                         |
 | UC-20      | Admin Adds Game to Schedule        | POST /api/games                              |
 | UC-23      | Admin Assigns Crew to Game         | POST /api/games/{gameId}/assign-crew         |
-| Extra      | View All Availability Records      | GET /api/availability                        |
+|            | View All Availability Records      | GET /api/availability                        |
 
 ---
 
@@ -58,3 +57,9 @@ FrogCrew is a Spring Boot REST API designed to help TCU Athletics manage schedul
 ### Availability
 - Fields: id, crewMember, game, available, comment  
 - Many-to-One to both CrewMember and Game 
+
+---
+
+## Acknowledgements & Sources
+
+- This project is still being worked on. It is inspired by an existant TCU FrogCrew project. There are issues in terms of matching with the API documentation required (Specifically GameDto and GameScheduleDto), the implementation of role based authorization, and authentication, is also to be completed. 

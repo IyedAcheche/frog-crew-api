@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 // JPA entity for sporting events that need to be crewed
-// Supports Use Cases 5, 18, 20, and 23 related to game scheduling
+// Supports Use Cases 5, 20, and 23 related to game scheduling
 @Entity
 public class Game {
 
@@ -22,7 +22,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Basic game information
+   
     private String opponent;
     private String sport;
     private String venue;
@@ -33,9 +33,9 @@ public class Game {
     // And a crew member can be assigned to multiple games
     @ManyToMany
     @JoinTable(
-            name = "game_crew_member",  // Name of the join table in the database
-            joinColumns = @JoinColumn(name = "game_id"),  // Column for this entity (Game)
-            inverseJoinColumns = @JoinColumn(name = "crew_member_id")  // Column for the other entity (CrewMember)
+            name = "game_crew_member",  
+            joinColumns = @JoinColumn(name = "game_id"),  
+            inverseJoinColumns = @JoinColumn(name = "crew_member_id")  
     )
     private Set<CrewMember> assignedCrew = new HashSet<>();
 

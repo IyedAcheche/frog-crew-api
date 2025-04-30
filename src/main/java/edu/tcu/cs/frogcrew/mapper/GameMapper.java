@@ -18,6 +18,25 @@ import java.util.stream.Collectors;
 public class GameMapper {
 
     /**
+     * Converts a Game DTO to its entity representation.
+     * Takes a separate parameter for the assigned crew members set.
+     * 
+     * @param dto The DTO to convert
+     * @param assignedCrew The set of CrewMember entities to assign to the game
+     * @return A Game entity
+     */
+    public Game toEntity(GameDto dto, Set<CrewMember> assignedCrew) {
+        Game game = new Game();
+        game.setId(dto.getId());
+        game.setOpponent(dto.getOpponent());
+        game.setSport(dto.getSport());
+        game.setVenue(dto.getVenue());
+        game.setGameDateTime(dto.getGameDateTime());
+        game.setAssignedCrew(assignedCrew);
+        return game;
+    }
+
+    /**
      * Converts a Game entity to its DTO representation.
      * Maps complex fields like assignedCrew to simple ID collections.
      * 
@@ -38,24 +57,5 @@ public class GameMapper {
                         .collect(Collectors.toList())
         );
         return dto;
-    }
-
-    /**
-     * Converts a Game DTO to its entity representation.
-     * Takes a separate parameter for the assigned crew members set.
-     * 
-     * @param dto The DTO to convert
-     * @param assignedCrew The set of CrewMember entities to assign to the game
-     * @return A Game entity
-     */
-    public Game toEntity(GameDto dto, Set<CrewMember> assignedCrew) {
-        Game game = new Game();
-        game.setId(dto.getId());
-        game.setOpponent(dto.getOpponent());
-        game.setSport(dto.getSport());
-        game.setVenue(dto.getVenue());
-        game.setGameDateTime(dto.getGameDateTime());
-        game.setAssignedCrew(assignedCrew);
-        return game;
     }
 }

@@ -10,20 +10,20 @@ import org.springframework.stereotype.Component;
  */
 public interface CrewMemberMapper {
     /**
-     * Converts a CrewMember entity to its DTO representation.
-     * 
-     * @param entity The CrewMember entity to convert
-     * @return A DTO representation of the CrewMember
-     */
-    CrewMemberDto toDto(CrewMember entity);
-
-    /**
      * Converts a CrewMember DTO to its entity representation.
      * 
      * @param dto The DTO to convert
      * @return A CrewMember entity
      */
     CrewMember toEntity(CrewMemberDto dto);
+    
+    /**
+     * Converts a CrewMember entity to its DTO representation.
+     * 
+     * @param entity The CrewMember entity to convert
+     * @return A DTO representation of the CrewMember
+     */
+    CrewMemberDto toDto(CrewMember entity);
 }
 
 /**
@@ -32,20 +32,6 @@ public interface CrewMemberMapper {
  */
 @Component
 class CrewMemberMapperImpl implements CrewMemberMapper {
-    @Override
-    public CrewMemberDto toDto(CrewMember entity) {
-        CrewMemberDto dto = new CrewMemberDto();
-        dto.setId(entity.getId());
-        dto.setFirstName(entity.getFirstName());
-        dto.setLastName(entity.getLastName());
-        dto.setEmail(entity.getEmail());
-        dto.setPhoneNumber(entity.getPhoneNumber());
-        dto.setRole(entity.getRole());
-        dto.setQualifiedPosition(entity.getQualifiedPosition());
-        dto.setInvited(entity.isInvited());
-        return dto;
-    }
-
     @Override
     public CrewMember toEntity(CrewMemberDto dto) {
         CrewMember entity = new CrewMember();
@@ -58,5 +44,19 @@ class CrewMemberMapperImpl implements CrewMemberMapper {
         entity.setQualifiedPosition(dto.getQualifiedPosition());
         entity.setInvited(dto.isInvited());
         return entity;
+    }
+    
+    @Override
+    public CrewMemberDto toDto(CrewMember entity) {
+        CrewMemberDto dto = new CrewMemberDto();
+        dto.setId(entity.getId());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
+        dto.setEmail(entity.getEmail());
+        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setRole(entity.getRole());
+        dto.setQualifiedPosition(entity.getQualifiedPosition());
+        dto.setInvited(entity.isInvited());
+        return dto;
     }
 }

@@ -13,7 +13,7 @@ public class GameDto {
     private String sport;
     private String venue;
     private LocalDateTime gameDateTime;
-    private List<Long> assignedCrewIds; // Optional for UC-23
+    private List<Long> assignedCrewIds; // Used for UC-23
 
     public void setId(Long id) {
         this.id = id;

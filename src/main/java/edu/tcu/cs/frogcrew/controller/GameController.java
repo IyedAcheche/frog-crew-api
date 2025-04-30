@@ -23,13 +23,7 @@ public class GameController {
         return ResponseEntity.ok(service.findAllGames());
     }
 
-    // UC-18: Admin Creates Game Schedule (creates multiple games)
-    @PostMapping("/bulk")
-    public ResponseEntity<List<GameDto>> createGameSchedule(@RequestBody List<GameDto> games) {
-        return ResponseEntity.ok(service.createGameSchedule(games));
-    }
-
-    // UC-20: Admin Adds a Single Game to Game Schedule
+    // UC-20: Admin Adds a Single Game to Schedule
     @PostMapping
     public ResponseEntity<GameDto> addGame(@RequestBody GameDto gameDto) {
         return ResponseEntity.ok(service.addGame(gameDto));
