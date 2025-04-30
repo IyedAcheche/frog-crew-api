@@ -12,23 +12,30 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+// JPA entity for sporting events that need to be crewed
+// Supports Use Cases 5, 18, 20, and 23 related to game scheduling
 @Entity
 public class Game {
 
+    // Primary key with auto-increment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Basic game information
     private String opponent;
     private String sport;
     private String venue;
     private LocalDateTime gameDateTime;
 
+    // Many-to-many relationship with CrewMember
+    // A game can have multiple crew members assigned
+    // And a crew member can be assigned to multiple games
     @ManyToMany
     @JoinTable(
-            name = "game_crew_member",
-            joinColumns = @JoinColumn(name = "game_id"),
-            inverseJoinColumns = @JoinColumn(name = "crew_member_id")
+            name = "game_crew_member",  // Name of the join table in the database
+            joinColumns = @JoinColumn(name = "game_id"),  // Column for this entity (Game)
+            inverseJoinColumns = @JoinColumn(name = "crew_member_id")  // Column for the other entity (CrewMember)
     )
     private Set<CrewMember> assignedCrew = new HashSet<>();
 

@@ -4,14 +4,34 @@ import edu.tcu.cs.frogcrew.dto.CrewMemberDto;
 import edu.tcu.cs.frogcrew.entity.CrewMember;
 import org.springframework.stereotype.Component;
 
-public interface EntityDtoMapper {
+/**
+ * Maps between CrewMember entity and DTO objects.
+ * Provides conversion methods to transform entity objects to DTOs and vice versa.
+ */
+public interface CrewMemberMapper {
+    /**
+     * Converts a CrewMember entity to its DTO representation.
+     * 
+     * @param entity The CrewMember entity to convert
+     * @return A DTO representation of the CrewMember
+     */
     CrewMemberDto toDto(CrewMember entity);
 
+    /**
+     * Converts a CrewMember DTO to its entity representation.
+     * 
+     * @param dto The DTO to convert
+     * @return A CrewMember entity
+     */
     CrewMember toEntity(CrewMemberDto dto);
 }
 
+/**
+ * Implementation of the CrewMemberMapper interface.
+ * Handles the conversion between CrewMember entity and DTO objects.
+ */
 @Component
-class EntityDtoMapperImpl implements EntityDtoMapper {
+class CrewMemberMapperImpl implements CrewMemberMapper {
     @Override
     public CrewMemberDto toDto(CrewMember entity) {
         CrewMemberDto dto = new CrewMemberDto();
@@ -39,5 +59,4 @@ class EntityDtoMapperImpl implements EntityDtoMapper {
         entity.setInvited(dto.isInvited());
         return entity;
     }
-
 }

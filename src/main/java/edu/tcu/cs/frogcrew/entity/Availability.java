@@ -2,21 +2,30 @@ package edu.tcu.cs.frogcrew.entity;
 
 import jakarta.persistence.*;
 
+// JPA entity that stores crew member availability records for specific games
+// Implements Use Case 7: Crew Member Submits Availability
 @Entity
 public class Availability {
 
+    // Primary key with auto-increment
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Many availability records can link to one crew member
+    // optional=false ensures each availability must have a crew member
     @ManyToOne(optional = false)
     private CrewMember crewMember;
 
+    // Many availability records can link to one game
+    // optional=false ensures each availability must have a game
     @ManyToOne(optional = false)
     private Game game;
 
+    // Whether the crew member is available for this game
     private boolean available;
 
+    // Optional comment/notes about the availability
     private String comment;
 
     public Long getId() {

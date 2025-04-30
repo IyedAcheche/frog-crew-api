@@ -4,16 +4,20 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+// DTO for transferring crew member data between front-end and back-end
+// @Data from Lombok gives us getters, setters, toString, etc.
 @Data
 public class CrewMemberDto {
     private Long id;
 
+    // Makes sure the field isn't empty when creating/updating
     @NotBlank(message = "First name is required")
     private String firstName;
 
     @NotBlank(message = "Last name is required")
     private String lastName;
 
+    // Email must be provided and have a valid format
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     private String email;
@@ -23,6 +27,7 @@ public class CrewMemberDto {
     private String qualifiedPosition;
     private boolean invited;
 
+    // Getters and setters for all fields
     public Long getId() {
         return id;
     }

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// Service class that handles game-related business logic
 @Service
 public class GameService {
 
@@ -21,6 +22,7 @@ public class GameService {
     private final CrewMemberRepository crewMemberRepository;
     private final GameMapper gameMapper;
 
+    // Constructor injection of repositories and mapper
     public GameService(GameRepository gameRepository, CrewMemberRepository crewMemberRepository,
                                GameMapper gameMapper) {
         this.gameRepository = gameRepository;
@@ -28,6 +30,7 @@ public class GameService {
         this.gameMapper = gameMapper;
     }
 
+    // Get all games - implements Use Case 5
     public List<GameDto> findAllGames() {
         return gameRepository.findAll()
                 .stream()
@@ -39,6 +42,8 @@ public class GameService {
         // Optional: Initialize default entries or log action
     }
 
+    // Add a single game - implements Use Case 20
+    // @Transactional ensures DB operations are atomic
     @Transactional
     public GameDto addGame(GameDto gameDto) {
         Game game = gameMapper.toEntity(gameDto, new HashSet<>());
@@ -46,6 +51,7 @@ public class GameService {
         return gameMapper.toDto(savedGame);
     }
 
+    // Helper method to assign crew to a game
     @Transactional
     public void assignCrewToGame(Long gameId, List<Long> crewMemberIds) {
         Game game = gameRepository.findById(gameId)
@@ -56,6 +62,7 @@ public class GameService {
         gameRepository.save(game);
     }
 
+    // Create multiple games at once - implements Use Case 18
     @Transactional
     public List<GameDto> createGameSchedule(List<GameDto> games) {
         return games.stream()
@@ -67,6 +74,7 @@ public class GameService {
                 .collect(Collectors.toList());
     }
 
+    // Assign crew members to a game - implements Use Case 23
     @Transactional
     public GameDto assignCrew(Long gameId, List<Long> crewMemberIds) {
         Game game = gameRepository.findById(gameId)
@@ -78,5 +86,4 @@ public class GameService {
         Game savedGame = gameRepository.save(game);
         return gameMapper.toDto(savedGame);
     }
-
 }
