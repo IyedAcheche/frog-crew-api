@@ -8,6 +8,7 @@ public interface EntityDtoMapper {
     CrewMemberDto toDto(CrewMember entity);
 
     CrewMember toEntity(CrewMemberDto dto);
+}
 
 @Component
 class EntityDtoMapperImpl implements EntityDtoMapper {
@@ -38,4 +39,5 @@ class EntityDtoMapperImpl implements EntityDtoMapper {
         entity.setInvited(dto.isInvited());
         return entity;
     }
+
 }

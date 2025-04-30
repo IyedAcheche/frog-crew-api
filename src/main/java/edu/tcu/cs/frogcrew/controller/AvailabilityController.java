@@ -1,0 +1,32 @@
+package edu.tcu.cs.frogcrew.controller;
+
+import edu.tcu.cs.frogcrew.dto.AvailabilityDto;
+import edu.tcu.cs.frogcrew.service.AvailabilityService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/availability")
+public class AvailabilityController {
+
+    private final AvailabilityService availabilityService;
+
+    public AvailabilityController(AvailabilityService availabilityService) {
+        this.availabilityService = availabilityService;
+    }
+
+    // UC-7: Crew Member Submits Availability
+    @PostMapping("/submit")
+    public ResponseEntity<String> submitAvailability(@RequestBody AvailabilityDto dto) {
+        availabilityService.submitAvailability(dto);
+        return ResponseEntity.ok("Availability submitted successfully.");
+    }
+
+    // Get all availability records
+    @GetMapping
+    public ResponseEntity<List<AvailabilityDto>> getAllAvailability() {
+        return ResponseEntity.ok(availabilityService.getAllAvailability());
+    }
+}
